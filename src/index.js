@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import './index.css';
 import '../node_modules/highlight.js/styles/atom-one-dark.css';
 import Routes from './routes';
-import {loadConcepts} from './actions/conceptActions';
+import {loadQuestions} from './actions/questionActions';
 import registerServiceWorker from './registerServiceWorker';
 
 //TODO: Set up unit testing
@@ -14,7 +14,7 @@ import registerServiceWorker from './registerServiceWorker';
 const store=configureStore();
 
 //Dispatch Actions
-store.dispatch(loadConcepts());
+store.dispatch(loadQuestions());
 
 ReactDOM.render(
   (<Provider store={store}>

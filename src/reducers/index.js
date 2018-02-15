@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import concepts from './conceptReducer';
+import questions from './questionReducer';
 import error from './errorReducer';
 
 const rootReducer = combineReducers({
-  concepts,
+  questions,
   error
 });
 
