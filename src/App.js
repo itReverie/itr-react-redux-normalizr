@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -7,26 +7,14 @@ import PropTypes from 'prop-types';
 
 
 
-class App extends PureComponent {
-
-  constructor(props) {
-
-      super(props);
-       this.state ={
-         concepts: Object.assign({},this.props.concepts),
-         title: 'Borrowers',
-         errors: {}
-       };
-    }
+class App extends Component {
 
   render() {
     return <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React Performance with Redux and React 15</h1>
+          <h1 className="App-title">React Redux and Normalizr</h1>
         </header>
-        <p className="App-intro">
-         
-        </p>
+
       </div>;
   }
 }
