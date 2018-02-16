@@ -5,7 +5,6 @@ import Textbox from "./TextboxPart";
 import Label from "./LabelPart";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import jsonPath from 'jsonpath';
 import * as partActions from '../../actions/questionActions';
 
 const StyledOpenQuestion = styled.div`
@@ -36,13 +35,9 @@ class OpenQuestion extends PureComponent {
     return component;
   }
   render() {
-    console.log(this.props);
-    let questionId=this.props.question.id;
-
-    let partImInterested=this.props.parts[0]
     return (
       <StyledOpenQuestion>
-        {this.props.parts.byId[questionId].map((part) => {
+        {this.props.parts.byId[this.props.question.id].map((part) => {
           return this.getComponent(part)})}
         <Label text={'?'} />
       </StyledOpenQuestion>

@@ -57,7 +57,7 @@ getSuggestionValue = suggestion => suggestion;
   render() {
     console.log(this.props)
     const inputProps = {
-      placeholder:'hello world' ,
+      placeholder:this.props.part.type ,
       value: this.state.value,
       onChange: this.onChange
 
