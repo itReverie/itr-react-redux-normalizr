@@ -4,23 +4,23 @@ import Autosuggest from 'react-autosuggest';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as textActions from '../../actions/textActions';
-import * as suggestionActions from '../../actions/suggestionActions';
+import * as partActions from '../../actions/partActions';
 
 
 class TextboxPart extends Component {
 
-
-  state ={
-        textLocal: this.props.part.text,
-        suggestionsLocal: this.props.part.suggestions,
-      };
+  constructor(props){
+    super(props);
+    this.state={
+        part:Object.assign({}, this.props.part)
+    }
+  }
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
  getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-  return inputLength === 0 ? [] : this.props.suggestions.filter(suggestion =>
+  return inputLength === 0 ? [] : this.props.part.suggestions.filter(suggestion =>
     suggestion.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
@@ -31,65 +31,51 @@ class TextboxPart extends Component {
 getSuggestionValue = suggestion => suggestion;
 
 // Use your imagination to render suggestions.
- renderSuggestion = suggestion => (
-  <div>
-    {suggestion}
-  </div>
-);
+renderSuggestion = suggestion => (<div>{suggestion}</div>);
 
- //TODO: Is there a better way to do this?
+
   onChange = (event, { newValue }) => {
     //Updating the redux state
-     this.props.actions.updateTextSuccess(newValue);
-     //Updating the local state
-     this.setState({
-       textLocal: newValue
+    let newPart = Object.assign({},this.props.part);
+     newPart.text = newValue;
+    // console.log('onChange:', newPart);
+    this.props.actions.updateTextSuccess(newPart);
+    this.setState({
+        part:newPart
      });
 
-     if(newValue.length === 3)
-     {
-       //Call the api with suggestions
-       this.props.actions
-       .loadSuggestions( this.props.parts ,this.props.part.id)
-       // .then(result=>{
-       //   //console.log(result);
-       //   //console.log(this.props.suggestions);
-       //   this.setState({
-       //     suggestionslocal: result
-       //   });
-       // });
 
+     if(newValue.length === 3){
+       this.props.actions.loadSuggestions( this.props.parts ,this.props.part.id)
      }
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
-    //this.getSuggestions(value);
-    this.setState({
-      suggestionsLocal: this.getSuggestions(value)
-    });
+    this.getSuggestions(value);
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestionsLocal: []
-    });
+    //TODO: Maybe trigger another action dispatch to clean the suggestions
+    // this.setState({
+    //   suggestionsLocal: []
+    // });
   };
 
 
   render() {
-    console.log(this.props)
+    console.log('Render: ',this.props)
     const inputProps = {
       placeholder:this.props.part.type ,
-      value: this.state.textLocal,
+      value: this.state.part.text,
       onChange: this.onChange
 
   }
 
     return <Autosuggest
-        suggestions={this.state.suggestionsLocal}
+        suggestions={this.props.part.suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
@@ -103,8 +89,6 @@ getSuggestionValue = suggestion => suggestion;
 
 TextboxPart.propTypes={
     part: PropTypes.object.isRequired,
-    text: PropTypes.string.isRequired,
-    suggestions: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
     parts:PropTypes.object.isRequired,
 };
@@ -114,18 +98,16 @@ TextboxPart.propTypes={
 //-------------------------------------------------------------------
 //Redux connect section
 //-------------------------------------------------------------------
-function mapStateToProps(state) {
-  return {
-    text: state.text,
-    suggestions: state.suggestions};
+function mapStateToProps(state, part) {
+  //console.log('MAP STATE TO PROPS: ',state);
+  return { part: part.part};
 }
 
 
 function mapDispatchToProps (dispatch)
 {
   return {
-    actions: bindActionCreators({...textActions,
-                                 ...suggestionActions},dispatch)
+    actions: bindActionCreators(partActions,dispatch)
   };
 }
 

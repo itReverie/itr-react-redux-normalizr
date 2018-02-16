@@ -2,7 +2,6 @@
 export default{
   questions:[],
   parts:{},
-  text:"",
-  suggestions:[],
+  part:{},
   error:{message:''}
 };
