@@ -5,13 +5,6 @@
 import * as types from "./actionTypes";
 import suggestionApi from "../api/suggestionAPI";
 
-export function loadPart(part) {
-  return function (dispatch){
-    dispatch(
-       { type: types.LOAD_PART,
-         part: part });
-       }
-}
 
 function loadSuggestionsSuccess(suggestions) {
          return { type: types.LOAD_SUGGESTIONS_SUCCESS,
@@ -28,7 +21,6 @@ export function updateTextSuccess(part) {
               }
 
 export function loadSuggestions(openQuestion, partId) {
-
   return function (dispatch){
 
     return suggestionApi.getSuggestions(openQuestion, partId)

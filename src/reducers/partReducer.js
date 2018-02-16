@@ -3,31 +3,29 @@ import initialState from "./initialState";
 
 export default function partReducer(state = initialState.part, action) {
   switch (action.type) {
-    // case types.LOAD_PART:
-    //   //console.log('Reducer-LOAD_PART  state: ',state);
-    //   //console.log('Reducer-LOAD_PART: ',action.part.id);
-    //   let newPartState= Object.assign({},state.partState);
-    //   newPartState.id=   action.part.id;
-    //   newPartState.text= action.part.text;
-    //   newPartState.type= action.part.type;
-    //   newPartState.suggestions= action.part.suggestions;
-    //   return newPartState;
     case types.UPDATE_TEXT_SUCCESS:
-         console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
-         console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
+        // console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
+        // console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
 
          let newPartState2= Object.assign({},state.part);
          newPartState2.id=   action.part.id;
          newPartState2.text= action.part.text;
          newPartState2.type= action.part.type;
          newPartState2.suggestions= action.part.suggestions;
-         console.log('NEW STATE: ',newPartState2);
+        // console.log('NEW STATE: ',newPartState2);
         // newPartState2.text= action.part.text;
         return newPartState2;
     case types.UPDATE_TEXT_ERROR:
         return state.part;
     case types.LOAD_SUGGESTIONS_SUCCESS:
-          return state.part;
+          console.log('Reducer-SUGGESTIONS_SUCCESS-   state: ',state);
+          console.log('Reducer-SUGGESTIONS_SUCCESS-   action: ',action);
+
+
+            let newPartState3= Object.assign({},state);
+            newPartState3.suggestions= action.suggestions;
+            console.log('Reducer-SUGGESTIONS_SUCCESS-   NEW STATE: ',newPartState3);
+          return newPartState3;
     case types.LOAD_SUGGESTIONS_ERROR:
           return state.part;
     default:
