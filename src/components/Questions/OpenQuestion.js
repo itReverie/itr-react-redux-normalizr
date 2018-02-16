@@ -27,7 +27,7 @@ class OpenQuestion extends PureComponent {
            component= <Label text={part.text} questionId={this.props.question.id} key={part.id}/>
           }
          else{
-            component= <Textbox part={part} questionId={this.props.question.id} key={part.id}/>;
+            component= <Textbox part={part} parts={this.props.parts} key={part.id}/>;
          }
     }
     return component;

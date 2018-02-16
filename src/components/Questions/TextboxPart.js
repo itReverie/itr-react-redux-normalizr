@@ -13,7 +13,7 @@ class TextboxPart extends Component {
 
   state ={
         textLocal: this.props.part.text,
-        suggestionsLocal: this.props.part.suggestions,
+        //suggestionsLocal: this.props.part.suggestions,
       };
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -21,7 +21,9 @@ class TextboxPart extends Component {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  return inputLength === 0 ? [] : this.state.suggestionsLocal.filter(suggestion =>
+  console.log(this.props.suggestions);
+
+  return inputLength === 0 ? [] : this.props.suggestions.filter(suggestion =>
     suggestion.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
@@ -50,6 +52,15 @@ getSuggestionValue = suggestion => suggestion;
      if(newValue.length === 3)
      {
        //Call the api with suggestions
+       this.props.actions
+       .loadSuggestions( this.props.parts ,this.props.part.id)
+       // .then(result=>{
+       //   //console.log(result);
+       //   //console.log(this.props.suggestions);
+       //   this.setState({
+       //     suggestionslocal: result
+       //   });
+       // });
 
      }
   };
@@ -57,9 +68,10 @@ getSuggestionValue = suggestion => suggestion;
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestionsLocal: this.getSuggestions(value)
-    });
+    this.getSuggestions(value);
+    // this.setState({
+    //   suggestionsLocal: this.getSuggestions(value)
+    // });
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
@@ -80,7 +92,7 @@ getSuggestionValue = suggestion => suggestion;
   }
 
     return <Autosuggest
-        suggestions={this.props.part.suggestions}
+        suggestions={this.props.suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
@@ -95,7 +107,9 @@ getSuggestionValue = suggestion => suggestion;
 TextboxPart.propTypes={
     part: PropTypes.object.isRequired,
     text: PropTypes.string.isRequired,
-    actions: PropTypes.object.isRequired
+    suggestions: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
+    parts:PropTypes.object.isRequired,
 };
 
 
