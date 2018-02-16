@@ -23,9 +23,9 @@ export default class Question extends PureComponent {
                     this.state = { showLongQuestion: this.props.showLongQuestion };
                     this.onClick = this.onClick.bind(this);
                  }
-                
+
                 //Shows or hides the question box
-                onClick() {  
+                onClick() {
                    const { showLongQuestion } = this.state;
                    this.setState({
                      showLongQuestion: !showLongQuestion
@@ -43,7 +43,7 @@ export default class Question extends PureComponent {
 								 return  shortQuestion+"...?";
                  }
 
-                
+
                  /** Renders a list of questions */
                  render() {
 
@@ -69,4 +69,4 @@ export default class Question extends PureComponent {
             Question.propTypes={
               question:PropTypes.object.isRequired,
               showLongQuestion: PropTypes.bool.isRequired
-            };  
+            };
