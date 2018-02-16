@@ -24,26 +24,4 @@ export function loadQuestions() {
       });
 
   }
-
 }
-
-// export function loadQuestions(dispatch)
-// {
-//   return questionsApi.getAllQuestions().then(result=> {
-//       dispatch(loadQuestionsSuccess(result.questions));
-//       //dispatch(loadParts());
-//     })
-//     .catch(error => {
-//       throw error;
-//     });
-// }
-
-// export function loadParts()
-// {
-//
-// }
-//
-// export function loadSuggestions()
-// {
-//
-// }

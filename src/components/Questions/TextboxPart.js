@@ -2,20 +2,26 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Autosuggest from 'react-autosuggest';
 
-export default class TextboxPart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: ''
-    }
-  }
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as textActions from '../../actions/textActions';
+import * as suggestionActions from '../../actions/suggestionActions';
+
+
+class TextboxPart extends Component {
+
+
+  state ={
+        textLocal: this.props.part.text,
+        suggestionsLocal: this.props.part.suggestions,
+      };
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
  getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  return inputLength === 0 ? [] : this.props.part.suggestions.filter(suggestion =>
+  return inputLength === 0 ? [] : this.state.suggestionsLocal.filter(suggestion =>
     suggestion.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
@@ -32,32 +38,43 @@ getSuggestionValue = suggestion => suggestion;
   </div>
 );
 
+ //TODO: Is there a better way to do this?
   onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
+    //Updating the redux state
+     this.props.actions.updateTextSuccess(newValue);
+     //Updating the local state
+     this.setState({
+       textLocal: newValue
+     });
+
+     if(newValue.length === 3)
+     {
+       //Call the api with suggestions
+
+     }
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: this.getSuggestions(value)
+      suggestionsLocal: this.getSuggestions(value)
     });
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestionsLocal: []
     });
   };
 
 
   render() {
+    //console.log(this.props)
     const inputProps = {
       placeholder:this.props.part.type ,
-      value: this.state.value,
+      value: this.state.textLocal,
       onChange: this.onChange
 
   }
@@ -77,4 +94,28 @@ getSuggestionValue = suggestion => suggestion;
 
 TextboxPart.propTypes={
     part: PropTypes.object.isRequired,
+    text: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired
 };
+
+
+
+//-------------------------------------------------------------------
+//Redux connect section
+//-------------------------------------------------------------------
+function mapStateToProps(state) {
+  return {
+    text: state.text,
+    suggestions: state.suggestions};
+}
+
+
+function mapDispatchToProps (dispatch)
+{
+  return {
+    actions: bindActionCreators({...textActions,
+                                 ...suggestionActions},dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextboxPart);
