@@ -13,16 +13,13 @@ class TextboxPart extends Component {
 
   state ={
         textLocal: this.props.part.text,
-        //suggestionsLocal: this.props.part.suggestions,
+        suggestionsLocal: this.props.part.suggestions,
       };
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
  getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-
-  console.log(this.props.suggestions);
-
   return inputLength === 0 ? [] : this.props.suggestions.filter(suggestion =>
     suggestion.toLowerCase().slice(0, inputLength) === inputValue
   );
@@ -68,10 +65,10 @@ getSuggestionValue = suggestion => suggestion;
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
-    this.getSuggestions(value);
-    // this.setState({
-    //   suggestionsLocal: this.getSuggestions(value)
-    // });
+    //this.getSuggestions(value);
+    this.setState({
+      suggestionsLocal: this.getSuggestions(value)
+    });
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
@@ -83,7 +80,7 @@ getSuggestionValue = suggestion => suggestion;
 
 
   render() {
-    //console.log(this.props)
+    console.log(this.props)
     const inputProps = {
       placeholder:this.props.part.type ,
       value: this.state.textLocal,
@@ -92,7 +89,7 @@ getSuggestionValue = suggestion => suggestion;
   }
 
     return <Autosuggest
-        suggestions={this.props.suggestions}
+        suggestions={this.state.suggestionsLocal}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
