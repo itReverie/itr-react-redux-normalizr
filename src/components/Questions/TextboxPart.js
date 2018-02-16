@@ -15,7 +15,7 @@ export default class TextboxPart extends Component {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  return inputLength === 0 ? [] : this.props.part.filter(suggestion =>
+  return inputLength === 0 ? [] : this.props.part.suggestions.filter(suggestion =>
     suggestion.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
