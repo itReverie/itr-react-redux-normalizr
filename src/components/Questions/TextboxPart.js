@@ -55,7 +55,6 @@ getSuggestionValue = suggestion => suggestion;
 
 
   render() {
-    console.log(this.props)
     const inputProps = {
       placeholder:this.props.part.type ,
       value: this.state.value,
@@ -65,7 +64,8 @@ getSuggestionValue = suggestion => suggestion;
 
     return <Autosuggest
         suggestions={this.props.part.suggestions}
-        onSuggestionsFetchRequested={this.props.onSuggestionsFetchRequested}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
         inputProps={inputProps}

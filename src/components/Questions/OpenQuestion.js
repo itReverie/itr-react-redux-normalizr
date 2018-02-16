@@ -17,11 +17,9 @@ const StyledOpenQuestion = styled.div`
 `;
 
 class OpenQuestion extends PureComponent {
-
   getComponent(part)
   {
     let component=null;
-
     if(part !== undefined)
     {
          if(part.isReadOnly)
@@ -58,7 +56,6 @@ OpenQuestion.propTypes = {
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state) {
-  console.log(state);
   return {parts: state.parts};
 }
 
