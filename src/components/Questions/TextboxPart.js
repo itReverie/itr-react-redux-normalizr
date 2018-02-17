@@ -29,8 +29,9 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
   onChange = (event, { newValue }) => {
     let newPart = Object.assign({},this.props.part);
     newPart.text = newValue;
+    console.log(newPart);
     this.props.actions.updateTextSuccess(newPart);
-    ;
+
     // this.setState({
     //     part:newPart
     //  });
@@ -74,9 +75,9 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
 
 
 TextboxPart.propTypes={
+    questionId: PropTypes.number.isRequired,
     part: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
-    parts:PropTypes.object.isRequired,
 };
 
 

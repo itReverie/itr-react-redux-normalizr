@@ -1,5 +1,6 @@
 export default {
-  questions: [{
+  questions: [
+    {
       id: 1,
       openQuestion: false,
       longQuestion: "What percentage of borrowers have outstanding contracts that are overdue?"
@@ -23,74 +24,76 @@ export default {
       longQuestion: "How many Custom",
       parts: [1, 2]
     }
-
   ],
-  parts:
-    {
-      byId:{
-      3: [
-        {
-          id: 1,
-          isReadOnly: true,
-          type: "other",
-          text: "Which"
-        },
-        {
-          id: 2,
-          isReadOnly: false,
-          type: "noun",
-          text: "",
-          suggestions: []
-        },
-        {
-          id: 3,
-          isReadOnly: true,
-          type: "other",
-          text: "that are"
-        },
-        {
-          id: 4,
-          isReadOnly: false,
-          type: "adj",
-          text: "",
-          suggestions: []
-        },
-        {
-          id: 5,
-          isReadOnly: true,
-          type: "other",
-          text: "have"
-        },
-        {
-          id: 6,
-          isReadOnly: false,
-          type: "noun",
-          text: "",
-          suggestions: []
+  parts: {
+    byQuestionId: {
+      3: {
+        byPartId: {
+          1: {
+            id: 1,
+            isReadOnly: true,
+            type: "other",
+            text: "Which"
+          },
+          2: {
+            id: 2,
+            isReadOnly: false,
+            type: "noun",
+            text: "",
+            suggestions: []
+          },
+          3: {
+            id: 3,
+            isReadOnly: true,
+            type: "other",
+            text: "that are"
+          },
+          4: {
+            id: 4,
+            isReadOnly: false,
+            type: "adj",
+            text: "",
+            suggestions: []
+          },
+          5: {
+            id: 5,
+            isReadOnly: true,
+            type: "other",
+            text: "have"
+          },
+          6: {
+            id: 6,
+            isReadOnly: false,
+            type: "noun",
+            text: "",
+            suggestions: []
+          }
         }
-      ],
-      4: [
-        {
-          id: 1,
-          isReadOnly: true,
-          type: "other",
-          text: "How many"
-        },
-        {
-          id: 2,
-          isReadOnly: false,
-          type: "noun",
-          text: "",
-          suggestions: []
-        },
-        {
-          id: 3,
-          isReadOnly: false,
-          type: "adjective",
-          text: "",
-          suggestions: []
+      },
+      4: {
+        byPartId: {
+          1: {
+            id: 1,
+            isReadOnly: true,
+            type: "other",
+            text: "How many"
+          },
+          2: {
+            id: 2,
+            isReadOnly: false,
+            type: "noun",
+            text: "",
+            suggestions: []
+          },
+          3: {
+            id: 3,
+            isReadOnly: false,
+            type: "adjective",
+            text: "",
+            suggestions: []
+          }
         }
-      ]
+      }
     }
-    }
+  }
 }

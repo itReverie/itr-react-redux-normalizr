@@ -27,15 +27,18 @@ class OpenQuestion extends PureComponent {
            component= <Label text={part.text} questionId={this.props.question.id} key={part.id}/>
           }
          else{
-            component= <Textbox part={part} parts={this.props.parts} key={part.id}/>;
+            component= <Textbox part={part} questionId={this.props.question.id} key={part.id}/>;
          }
     }
     return component;
   }
   render() {
+      let questionParts=this.props.parts.byQuestionId[this.props.question.id].byPartId;
+      //console.log(Object.values(questionParts));
+
     return (
       <StyledOpenQuestion>
-        {this.props.parts.byId[this.props.question.id].map((part) => {
+        { Object.values(questionParts).map(part => {
           return this.getComponent(part)})}
         <Label text={'?'} />
       </StyledOpenQuestion>
