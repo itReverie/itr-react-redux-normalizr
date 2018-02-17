@@ -12,11 +12,12 @@ function loadSuggestionsSuccess(suggestions) {
 }
 
 
-export function updateTextSuccess(part) {
+export function updateTextSuccess(part, questionId) {
          return function (dispatch){
            dispatch(
                 { type: types.UPDATE_TEXT_SUCCESS,
-                  part: part});
+                  part: part,
+                  questionId: questionId});
                 }
               }
 

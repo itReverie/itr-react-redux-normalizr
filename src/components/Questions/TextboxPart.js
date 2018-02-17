@@ -8,14 +8,6 @@ import * as partActions from '../../actions/partActions';
 
 class TextboxPart extends Component {
 
-  // constructor(props){
-  //   super(props);
-  //   this.state={
-  //       part:Object.assign({}, this.props.part),
-  //       suggestions:Object.assign({}, this.props.part.suggestions)
-  //   }
-  // }
-
 getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
@@ -29,12 +21,7 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
   onChange = (event, { newValue }) => {
     let newPart = Object.assign({},this.props.part);
     newPart.text = newValue;
-    console.log(newPart);
-    this.props.actions.updateTextSuccess(newPart);
-
-    // this.setState({
-    //     part:newPart
-    //  });
+    this.props.actions.updateTextSuccess(newPart, this.props.questionId);
     if(newValue.length === 3){
        this.props.actions.loadSuggestions( this.props.parts ,this.props.part.id)
      }
@@ -85,9 +72,9 @@ TextboxPart.propTypes={
 //-------------------------------------------------------------------
 //Redux connect section
 //-------------------------------------------------------------------
-function mapStateToProps(state, part){
-  console.log(state);
-  return { part: part.part};
+function mapStateToProps(state, props){
+  //console.log(props.part);
+  return { part: props.part};
 }
 
 function mapDispatchToProps (dispatch)
