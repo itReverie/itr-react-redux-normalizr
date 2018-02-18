@@ -9,11 +9,6 @@ import * as questionActions from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
 import { getQuestions } from './selectors'
 
-// <ListQuestions
-//   listQuestions={this.props.questions}
-//   width={1000}
-//   showLongQuestion={true}
-//   height={1000}/>
 class App extends Component {
 
   render() {
@@ -45,7 +40,7 @@ App.propTypes={
 //-------------------------------------------------------------------
 function mapStateToProps(state) {
   //console.log('STATE:',state)
-  console.log('STATE TO JS:',state.toJS().questions)
+  console.log('STATE QUESTIONS:',state.toJS().questions)
   return {questions: state.toJS().questions};
 }
 

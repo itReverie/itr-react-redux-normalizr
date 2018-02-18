@@ -33,8 +33,8 @@ class OpenQuestion extends PureComponent {
     return component;
   }
   render() {
+      console.log('OPEN Question props:',this.props);
       let questionParts=this.props.parts.byQuestionId[this.props.question.id].byPartId;
-      //console.log(Object.values(questionParts));
 
     return (
       <StyledOpenQuestion>
@@ -59,7 +59,8 @@ OpenQuestion.propTypes = {
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state) {
-  return {parts: state.parts};
+  console.log('STATE PARTS:', state.toJS());
+  return {parts: state.toJS().parts};
 }
 
 

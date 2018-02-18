@@ -19,9 +19,9 @@ export function loadQuestions() {
     return questionsApi.getAllQuestions().then(result=> {
         console.log('Result from API:',result);
         const normalizedData = normalizeData(result);
-
+        dispatch(loadPartsSuccess(normalizedData.result.parts));
         dispatch(loadQuestionsSuccess(normalizedData.entities.questions));
-        dispatch(loadPartsSuccess(normalizedData.result));
+
       })
       .catch(error => {
         throw error;

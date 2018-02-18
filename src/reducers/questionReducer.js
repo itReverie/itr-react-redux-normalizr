@@ -7,11 +7,9 @@ import Immutable from 'immutable';
 export default function questionReducer(state = Map({}), action) {
   switch (action.type) {
     case types.LOAD_QUESTIONS_SUCCESS:
-     console.log('ACTION:',action);
-      //let Idontknow=state.merge(action.questions);
-      let Idontknow=Map(action.questions);
-      console.log('newState:',Idontknow);
-      return Idontknow;
+      let questions=Map(action.questions);
+      console.log('newState:',questions);
+      return questions;
     case types.LOAD_QUESTIONS_ERROR:
       return action.questions;
 

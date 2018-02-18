@@ -6,7 +6,10 @@ import { List, Map } from 'immutable';
 export default function partReducer(state = Map({}), action) {
   switch (action.type) {
     case types.LOAD_PARTS_SUCCESS:
-      return action.parts;
+      console.log('ACTION PARTS: ',action.parts);
+      let parts=Map(action.parts);
+      console.log('Reducer LOAD PARTS SUCCESS:',parts);
+      return parts;
     case types.LOAD_PARTS_ERROR:
       return action.parts;
     case types.UPDATE_TEXT_SUCCESS:

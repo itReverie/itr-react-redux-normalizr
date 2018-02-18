@@ -75,7 +75,10 @@ TextboxPart.propTypes={
 function mapStateToProps(state, props){
   //console.log(state.parts.byQuestionId[props.questionId].byPartId[props.part.id]);
   //Instead of using props.part It seems that using the state is the correct
-  return { part: state.parts.byQuestionId[props.questionId].byPartId[props.part.id]};
+
+  let selector = state.toJS().parts.byQuestionId[props.questionId].byPartId[props.part.id];
+  console.log(' TEXTBOXPART: ', selector);
+  return { part: selector};
 }
 
 function mapDispatchToProps (dispatch)
