@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function errorReducer(state = initialState.error, action)
+export default function errorReducer(state = "", action)
 {
   switch (action.type)
   {

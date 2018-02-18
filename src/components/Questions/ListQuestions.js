@@ -23,9 +23,10 @@ export default class ListQuestions extends PureComponent {
 
                  /** Renders a list of questions */
                  render() {
+                   Object.values
                    return <StyledListQuestions width={this.props.width} height={this.props.height}>
                        <Subtitle subtitle="Questions" />
-                       {this.props.listQuestions.map(
+                       {Object.values(this.props.listQuestions).map(
                          (question) => (
                            <Question
                              key={question.id}
@@ -40,7 +41,7 @@ export default class ListQuestions extends PureComponent {
 
 
                ListQuestions.propTypes = {
-                listQuestions: PropTypes.array.isRequired,
+                listQuestions: PropTypes.object.isRequired,
                 width: PropTypes.number.isRequired,
                 showLongQuestion: PropTypes.bool.isRequired,
                 height: PropTypes.number.isRequired

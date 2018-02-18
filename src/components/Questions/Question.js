@@ -51,7 +51,7 @@ export default class Question extends PureComponent {
                     let longQuestion=null;
                     if (this.state.showLongQuestion) {
                       if(this.props.question.openQuestion){
-                        longQuestion= <OpenQuestion question={this.props.question}/>
+                        longQuestion= null;//<OpenQuestion question={this.props.question}/>
                       }
                       else{
                          longQuestion= <CloseQuestion question={this.props.question.longQuestion} />

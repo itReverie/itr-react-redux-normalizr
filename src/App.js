@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 
 import * as questionActions from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
+import { getQuestions } from './selectors'
 
 // <ListQuestions
 //   listQuestions={this.props.questions}
@@ -34,7 +35,7 @@ class App extends Component {
 
 
 App.propTypes={
-  questions: PropTypes.array.isRequired,
+  questions: PropTypes.object.isRequired,
   actions : PropTypes.object.isRequired
 };
 
@@ -43,8 +44,9 @@ App.propTypes={
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state) {
-  console.log('STATE:',state)
-  return {questions: state.questions};
+  //console.log('STATE:',state)
+  console.log('STATE TO JS:',state.toJS().questions)
+  return {questions: state.toJS().questions};
 }
 
 
