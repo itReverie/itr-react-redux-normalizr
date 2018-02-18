@@ -73,8 +73,9 @@ TextboxPart.propTypes={
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state, props){
-  //console.log(props.part);
-  return { part: props.part};
+  //console.log(state.parts.byQuestionId[props.questionId].byPartId[props.part.id]);
+  //Instead of using props.part It seems that using the state is the correct
+  return { part: state.parts.byQuestionId[props.questionId].byPartId[props.part.id]};
 }
 
 function mapDispatchToProps (dispatch)
