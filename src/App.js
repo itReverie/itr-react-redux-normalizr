@@ -8,20 +8,26 @@ import {bindActionCreators} from 'redux';
 import * as questionActions from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
 
-
+// <ListQuestions
+//   listQuestions={this.props.questions}
+//   width={1000}
+//   showLongQuestion={true}
+//   height={1000}/>
 class App extends Component {
 
   render() {
+    console.log(this.props);
     return <div className="App">
         <header className="App-header">
           <h1 className="App-title">React Redux and Normalizr</h1>
         </header>
 
         <ListQuestions
-          listQuestions={this.props.questions}
-          width={1000}
-          showLongQuestion={true}
-          height={1000}/>
+           listQuestions={this.props.questions}
+           width={1000}
+           showLongQuestion={true}
+           height={1000}/>
+
       </div>;
   }
 }
@@ -37,6 +43,7 @@ App.propTypes={
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state) {
+  console.log('STATE:',state)
   return {questions: state.questions};
 }
 

@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux-immutable';
 import questions from './questionReducer';
 import parts from './partsReducer';
 import error from './errorReducer';

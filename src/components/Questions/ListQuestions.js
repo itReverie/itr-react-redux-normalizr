@@ -19,7 +19,7 @@ const StyledListQuestions = styled.div.attrs({
 
 
 export default class ListQuestions extends PureComponent {
-  
+
 
                  /** Renders a list of questions */
                  render() {
@@ -41,7 +41,7 @@ export default class ListQuestions extends PureComponent {
 
                ListQuestions.propTypes = {
                 listQuestions: PropTypes.array.isRequired,
-                width: PropTypes.number.isRequired, 
+                width: PropTypes.number.isRequired,
                 showLongQuestion: PropTypes.bool.isRequired,
-                height: PropTypes.number.isRequired 
+                height: PropTypes.number.isRequired
               };

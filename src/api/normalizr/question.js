@@ -1,6 +1,6 @@
 import { normalize, schema } from 'normalizr';
-
-// Define a question schema
+import originalSchema from "../data/originalSchema";
+// Define a suggestion schema
 const suggestion = new schema.Entity('suggestions');
 
 // Define a part schema
@@ -8,9 +8,16 @@ const part = new schema.Entity('parts', {
   suggestions: [suggestion]
 });
 
-// Define your article
+// Define a question schema
 const question = new schema.Entity('questions', {
-  parts: [ part ]
-});
+                                                  parts: [ part ]
+                                                });
 
-const normalizedData = normalize(originalData, question);
+const questionArray = new schema.Array(question);
+
+
+export function normalizeData(originalData){
+  const normalizedData = normalize(originalData, {questions:questionArray});
+  console.log('Result after NORMALIZR:',normalizedData);
+  return normalizedData;
+}
