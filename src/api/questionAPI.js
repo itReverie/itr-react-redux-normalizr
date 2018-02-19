@@ -1,4 +1,4 @@
-import dataQuestions from './data/questions';
+import dataQuestions from './data/questionsOption1';
 class questionsAPI {
   static getAllQuestions() {
     return new Promise((resolve, reject) => {

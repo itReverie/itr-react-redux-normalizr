@@ -1,9 +1,8 @@
 //This is a way to visualize the origin state in our store
-import Immutable from 'immutable';
-let initialState= Immutable.Map({
-  questions:{},
-  parts:{},
-  error:{message:''}
+import { fromJS } from 'immutable';
+
+const initialState= fromJS({
+  questions:{}
 });
-console.log('INITIAL STATE: ',initialState);
+console.log('REDUCER initial state: ',initialState);
 export default initialState;

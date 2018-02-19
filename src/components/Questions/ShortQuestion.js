@@ -20,6 +20,7 @@ const StyledExpandtIcon = styled.img`
 `;
 
 export default class ShortQuestion extends PureComponent {
+
                  /** Renders a list of questions */
                  render() {
                    return <StyledShortQuestion>
@@ -37,5 +38,3 @@ ShortQuestion.propTypes = {
 ShortQuestion.defaultProps={
   question:'Create your own'
 }
-
-

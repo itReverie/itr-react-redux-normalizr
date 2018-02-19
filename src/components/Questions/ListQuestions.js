@@ -20,10 +20,9 @@ const StyledListQuestions = styled.div.attrs({
 
 export default class ListQuestions extends PureComponent {
 
-
                  /** Renders a list of questions */
                  render() {
-                   Object.values
+
                    return <StyledListQuestions width={this.props.width} height={this.props.height}>
                        <Subtitle subtitle="Questions" />
                        {Object.values(this.props.listQuestions).map(

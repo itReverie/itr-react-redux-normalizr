@@ -1,26 +1,19 @@
 import * as types from "./actionTypes";
 import questionsApi from "../api/questionAPI";
-import {normalizeData} from "../api/normalizr/question";
+import normalizrQuestions from "../api/normalizr/normalizrQuestions";
 
-function loadPartsSuccess(parts) {
-         return { type: types.LOAD_PARTS_SUCCESS,
-                  parts: parts};
-}
-
-function loadQuestionsSuccess(questions) {
+function loadQuestionsSuccess(payload) {
          return { type: types.LOAD_QUESTIONS_SUCCESS,
-                  questions: questions };
+                  payload: payload };
        }
 
 export function loadQuestions() {
-
   return function (dispatch){
-
-    return questionsApi.getAllQuestions().then(result=> {
-        console.log('Result from API:',result);
-        const normalizedData = normalizeData(result);
-        dispatch(loadPartsSuccess(normalizedData.result.parts));
-        dispatch(loadQuestionsSuccess(normalizedData.entities.questions));
+    return questionsApi.getAllQuestions().then(apiData=> {
+        console.log('Result from API:',apiData);
+        const normalizedData = normalizrQuestions(apiData);
+        console.log('Result from NORMALIZR:',normalizedData);
+        dispatch(loadQuestionsSuccess(normalizedData));//ASK: Do I need to send all data or filter questions? 
 
       })
       .catch(error => {

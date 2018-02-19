@@ -5,21 +5,35 @@ import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import * as questionActions from './actions/questionActions';
+//import * as questionActions from './actions/questionActions';
+import { loadQuestions } from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
-import { getQuestions } from './selectors'
+import {getQuestions} from './selectors'
+import { createSelector } from 'reselect';
+import Immutable from 'immutable';
 
 class App extends Component {
 
+  componentDidMount() {
+    console.log('Component Did Mount');
+    this.props.loadQuestions();
+  }
+
   render() {
-    console.log(this.props);
+    console.log('App render: ',this.props);
+   const { questions } = this.props;
+
+   if (!questions) return null;
+
+   if (questions.size === 0) return <h1>No Result</h1>;
+
     return <div className="App">
         <header className="App-header">
           <h1 className="App-title">React Redux and Normalizr</h1>
         </header>
 
         <ListQuestions
-           listQuestions={this.props.questions}
+           listQuestions={questions}
            width={1000}
            showLongQuestion={true}
            height={1000}/>
@@ -29,27 +43,29 @@ class App extends Component {
 }
 
 
-App.propTypes={
-  questions: PropTypes.object.isRequired,
-  actions : PropTypes.object.isRequired
-};
+// App.propTypes={
+//   //questions: PropTypes.object.isRequired,
+//   actions : PropTypes.object.isRequired
+// };
 
 
 //-------------------------------------------------------------------
 //Redux connect section
 //-------------------------------------------------------------------
-function mapStateToProps(state) {
-  //console.log('STATE:',state)
-  console.log('STATE QUESTIONS:',state.toJS().questions)
-  return {questions: state.toJS().questions};
+ function mapStateToProps(state) {
+  console.log('CURRENT STATE???',state);
+  const getQuestions = state => {let variable=state.getIn(['entities', 'questions']);
+                                console.log('Questions???',variable);};
+  console.log('MAPSTATETOPROPS getQuestions:',getQuestions(state) )
+   return {questions: getQuestions(state) };
 }
 
 
-function mapDispatchToProps (dispatch)
-{
-  return {
-    actions: bindActionCreators(questionActions,dispatch)
-  };
-}
+// function mapDispatchToProps (dispatch)
+// {
+//   return {
+//     actions: bindActionCreators(questionActions,dispatch)
+//   };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {loadQuestions})(App);

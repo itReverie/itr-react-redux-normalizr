@@ -1,15 +1,17 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
-import { List, Map } from 'immutable';
+import { List, Map , fromJS} from 'immutable';
 import Immutable from 'immutable';
 
 
-export default function questionReducer(state = Map({}), action) {
+export default function questionReducer(state = initialState, action) {
   switch (action.type) {
     case types.LOAD_QUESTIONS_SUCCESS:
-      let questions=Map(action.questions);
-      console.log('newState:',questions);
-      return questions;
+      console.log('REDUCER questions original state:',state);
+      console.log('REDUCER questions action:',action.payload);
+      let newState=state.mergeDeep(action.payload);
+      console.log('REDUCER questions new state:',newState);
+      return newState;
     case types.LOAD_QUESTIONS_ERROR:
       return action.questions;
 
