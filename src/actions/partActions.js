@@ -2,9 +2,11 @@ import * as types from "./actionTypes";
 import suggestionApi from "../api/suggestionAPI";
 
 
-function loadSuggestionsSuccess(suggestions) {
+function loadSuggestionsSuccess(suggestions, questionId, partId) {
          return { type: types.LOAD_SUGGESTIONS_SUCCESS,
-                  suggestions: suggestions};
+                  suggestions: suggestions,
+                  questionId: questionId,
+                  partId: partId};
 }
 
 export function updateTextSuccess(updatedText, questionId, partId) {
@@ -17,12 +19,12 @@ export function updateTextSuccess(updatedText, questionId, partId) {
                 }
               }
 
-export function loadSuggestions(openQuestion, partId) {
+export function loadSuggestions(openQuestion, questionId, partId) {
   return function (dispatch){
 
     return suggestionApi.getSuggestions(openQuestion, partId)
       .then(result=> {
-        dispatch(loadSuggestionsSuccess(result.suggestions));
+        dispatch(loadSuggestionsSuccess(result.suggestions, questionId, partId));
       })
       .catch(error => {
         throw error;

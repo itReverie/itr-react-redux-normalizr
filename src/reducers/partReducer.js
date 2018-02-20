@@ -11,31 +11,26 @@ export default function partReducer(state = fromJS({parts:{}}), action) {
         return newStateParts;
 
     case types.UPDATE_TEXT_SUCCESS:
-          console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
-          console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
+          //console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
+          //console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
 
          let filterPart=state.setIn(['byQuestionId',
                       action.questionId.toString(),
                       'byPartId',
                       action.partId.toString(),
-                      'text'],                      action.updatedText);
+                      'text'],action.updatedText);
          console.log(filterPart);
-         //let updatedState = filterPart.set('text', action.updatedText)
-         //console.log(updatedState);
-         //xxx.set('text', action.updatedText);
-
           return filterPart;
     case types.UPDATE_TEXT_ERROR:
           return state.part;
     case types.LOAD_SUGGESTIONS_SUCCESS:
-            console.log('Reducer-SUGGESTIONS_SUCCESS-   state: ',state);
-            console.log('Reducer-SUGGESTIONS_SUCCESS-   action: ',action);
-
-
-              let newPartState3= Object.assign({},state);
-              newPartState3.suggestions= action.suggestions;
-              console.log('Reducer-SUGGESTIONS_SUCCESS-   NEW STATE: ',newPartState3);
-            return newPartState3;
+          let updateSuggestions=state.setIn(['byQuestionId',
+                 action.questionId.toString(),
+                 'byPartId',
+                 action.partId.toString(),
+                 'suggestions'],action.suggestions);
+            console.log(updateSuggestions);
+            return updateSuggestions;
     case types.LOAD_SUGGESTIONS_ERROR:
             return state.part;
     default:

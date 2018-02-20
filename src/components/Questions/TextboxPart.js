@@ -22,16 +22,14 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
   onChange = (event, { newValue }) => {
     //let newPart = Object.assign({},this.props.part);
     //newPart.text = newValue;
-    this.props.actions.updateTextSuccess(newValue, this.props.questionId, this.props.partId);
+    this.props.actions.updateTextSuccess(newValue.toLowerCase(), this.props.questionId, this.props.partId);
     if(newValue.length === 3){
-       this.props.actions.loadSuggestions( this.props.parts ,this.props.part.id)
+       this.props.actions.loadSuggestions( this.props.part , this.props.questionId, this.props.partId)
      }
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
-    // this.setState({
-    //       suggestions: getSuggestions(value)
-    //     });
+    console.log('SuggestionsFetchRequested:', value);
     this.getSuggestions(value);
   };
   onSuggestionsClearRequested = () => {
@@ -47,10 +45,11 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
       placeholder:this.props.part.get('type') ,
       value: this.props.part.get('text'),
       onChange: this.onChange
+    }
+    console.log('SUGGESTIONS: ',this.props.part.get('suggestions'));
 
-  }
     return <Autosuggest
-        suggestions={this.props.part.get('suggestions').toArray()}
+        suggestions={this.props.part.get('suggestions')}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
