@@ -25,12 +25,12 @@ export default class ListQuestions extends PureComponent {
 
                    return <StyledListQuestions width={this.props.width} height={this.props.height}>
                        <Subtitle subtitle="Questions" />
-                       {Object.values(this.props.listQuestions).map(
+                       {this.props.listQuestions.getIn(['entities','questions']).map(
                          (question) => (
                            <Question
-                             key={question.id}
+                             key={question.get('id')}
                              question={question}
-                             showLongQuestion={this.props.showLongQuestion}
+                             showLongQuestion={true}
                            />
                          )
                        )}

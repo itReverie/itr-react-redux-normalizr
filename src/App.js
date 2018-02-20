@@ -32,9 +32,9 @@ class App extends Component {
 
         <ListQuestions
            listQuestions={questions}
-           width={1000}
+           width={800}
            showLongQuestion={true}
-           height={1000}/>
+           height={800}/>
 
       </div>;
   }

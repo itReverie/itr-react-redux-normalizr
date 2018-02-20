@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import { Map } from 'immutable';
 
 const getQuestions = state => {
+                              
                               let theTempState=Immutable.fromJS(state);//TOASK: Is it ok to use FromJs?
                               //console.log('SELECTOR fromJS:',theTempState);
                               let pregGet=theTempState.get('questions')

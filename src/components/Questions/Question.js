@@ -18,14 +18,14 @@ const StyledQuestion = styled.div`
 
 export default class Question extends PureComponent {
 
-                 constructor(props){
+          constructor(props){
                    super(props);
                     this.state = { showLongQuestion: this.props.showLongQuestion };
                     this.onClick = this.onClick.bind(this);
                  }
 
                 //Shows or hides the question box
-                onClick() {
+          onClick() {
                    const { showLongQuestion } = this.state;
                    this.setState({
                      showLongQuestion: !showLongQuestion
@@ -33,7 +33,7 @@ export default class Question extends PureComponent {
                  }
 
                //Gets the first n words out of the long question
-               getWords(sentence, numberOfWords)
+          getWords(sentence, numberOfWords)
                  {
                    if(!Text.validString(sentence)){
                      return;
@@ -45,21 +45,23 @@ export default class Question extends PureComponent {
 
 
                  /** Renders a list of questions */
-                 render() {
+          render() {
                     //Decides if it's a short or long question
                     let longQuestion=null;
                     if (this.state.showLongQuestion) {
-                      if(this.props.question.openQuestion){
+                      if(this.props.question.get('openQuestion')){
                         longQuestion= null;//<OpenQuestion question={this.props.question}/>
                       }
                       else{
-                         longQuestion= <CloseQuestion question={this.props.question.longQuestion} />
+                         longQuestion= <CloseQuestion question={this.props.question.get('longQuestion')} />
                       }
                     }
 
 
                    return <StyledQuestion>
-                       <ShortQuestion onClick={this.onClick} id={this.props.question.id} question={this.getWords(this.props.question.longQuestion, 2)} />
+                       <ShortQuestion onClick={this.onClick}
+                                      id={this.props.question.get('id')}
+                                      question={this.getWords(this.props.question.get('longQuestion'), 2)} />
                        {longQuestion}
                      </StyledQuestion>;
                  }
