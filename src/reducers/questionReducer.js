@@ -1,5 +1,4 @@
 import * as types from "../actions/actionTypes";
-import initialState from "./initialState";
 import { List, fromJS} from 'immutable';
 
 //initialState --renders empty blank
@@ -10,7 +9,7 @@ export default function questionReducer(state = fromJS({questions:[]}), action) 
       //console.log('REDUCER questions original state:',state);
       //console.log('REDUCER questions action:',action);
       let newState=List(action.questions);
-      console.log('REDUCER questions:',newState);
+      //console.log('REDUCER questions:',newState);
       return newState;
     default:
       return state;

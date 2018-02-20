@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 const getQuestions = state => {
                               let theTempState=fromJS(state);//TOASK: Is it ok to use FromJs?
                               let newState=theTempState.get('questions')
-                              console.log('SELECTOR QUESTIONS newState:',newState);
+                              //console.log('SELECTOR QUESTIONS newState:',newState);
                               return newState;
                               };
 

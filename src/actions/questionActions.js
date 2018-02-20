@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import questionsApi from "../api/questionAPI";
-import normalizrQuestions from "../api/normalizr/normalizrQuestions";
+//import normalizrQuestions from "../api/normalizr/normalizrQuestions";
 
 function loadPartsSuccess(parts) {
          return { type: types.LOAD_PARTS_SUCCESS,
@@ -15,7 +15,7 @@ function loadQuestionsSuccess(questions) {
 export function loadQuestions() {
   return function (dispatch){
     return questionsApi.getAllQuestions().then(apiData=> {
-        console.log('Result from API:',apiData);
+        //console.log('Result from API:',apiData);
         //const normalizedData = normalizrQuestions(apiData);
         //console.log('Result from NORMALIZR:',normalizedData);
         dispatch(loadPartsSuccess(apiData.parts));

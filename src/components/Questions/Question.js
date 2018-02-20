@@ -47,6 +47,9 @@ export default class Question extends PureComponent {
 
                  /** Renders a list of questions */
           render() {
+
+                    if(this.props.question.longQuestion===undefined){return null;}
+
                     //Decides if it's a short or long question
                     let longQuestion=null;
                     if (this.state.showLongQuestion) {

@@ -10,7 +10,7 @@ const getParts = (state, questionId ) => {
                               //.filter(x=>x.id===currentQuestion)
                               //console.log('SELECTOR GET PARTS:',pregGet);
                               //let pregGetIn=theTempState.getIn(['entities', 'questions'])
-                              console.log('SELECTOR PARTS newState: ',newState);
+                              //console.log('SELECTOR PARTS newState: ',newState);
                               return newState;
                               };
 

@@ -12,12 +12,10 @@ class TextboxPart extends Component {
 getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-  return inputLength === 0 ? [] : this.props.part.get('suggestions').toArray().filter(suggestion =>
-    suggestion.toLowerCase().slice(0, inputLength) === inputValue
-  );};
+  return inputLength === 0 ? [] : this.props.part.get('suggestions').filter(suggestion =>
+    suggestion.toLowerCase().slice(0, inputLength) === inputValue);};
 getSuggestionValue = suggestion => suggestion;
 renderSuggestion = suggestion => (<div>{suggestion}</div>);
-
 
   onChange = (event, { newValue }) => {
     //let newPart = Object.assign({},this.props.part);
@@ -26,10 +24,13 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
     if(newValue.length === 3){
        this.props.actions.loadSuggestions( this.props.part , this.props.questionId, this.props.partId)
      }
+    //  if (event.key === 'Enter') {
+    //   console.log('do validate');
+    // }
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
-    console.log('SuggestionsFetchRequested:', value);
+    //console.log('SuggestionsFetchRequested:', value);
     this.getSuggestions(value);
   };
   onSuggestionsClearRequested = () => {
@@ -40,16 +41,22 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
   };
 
   render() {
-    console.log('TEXTBOXPART:  render props ',this.props)
+    //console.log('TEXTBOXPART:  render props ',this.props)
     const inputProps = {
       placeholder:this.props.part.get('type') ,
       value: this.props.part.get('text'),
       onChange: this.onChange
     }
-    console.log('SUGGESTIONS: ',this.props.part.get('suggestions'));
+
+    let suggestions=this.props.part.get('suggestions');
+    //console.log(suggestions.length);
+    if(suggestions.length === undefined){
+       suggestions=[];
+       //console.log('enteredd: ',suggestions);
+    };
 
     return <Autosuggest
-        suggestions={this.props.part.get('suggestions')}
+        suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
@@ -74,11 +81,7 @@ TextboxPart.propTypes={
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state, props){
-  //console.log(state.parts.byQuestionId[props.questionId].byPartId[props.part.id]);
-  //Instead of using props.part It seems that using the state is the correct
-
-  //let selector = state.toJS().parts.byQuestionId[props.questionId].byPartId[props.part.id];
-  console.log(' TEXTBOXPART: state', state);
+  //console.log(' TEXTBOXPART: state', state);
   return { part: getPartResult(state, props)};
 }
 

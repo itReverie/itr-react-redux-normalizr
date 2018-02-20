@@ -8,7 +8,7 @@ const getPart = (state, part ) => {
                               let theTempState=fromJS(state);//TOASK: Is it ok to use FromJs?
                               //console.log('SELECTOR PART fromJS:',theTempState);
                               let statePart=theTempState.getIn(['parts','byQuestionId',currentQuestion, 'byPartId', currentPart]);
-                              console.log('SELECTOR PART newState:',statePart);
+                              //console.log('SELECTOR PART newState:',statePart);
                               return statePart;
                               };
 

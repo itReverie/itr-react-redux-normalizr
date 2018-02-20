@@ -20,7 +20,7 @@ const StyledOpenQuestion = styled.div`
 class OpenQuestion extends PureComponent {
   getComponent(part)
   {
-    console.log('PART:', part);
+    //console.log('PART:', part);
     let component=null;
     if(part !== undefined)
     {
@@ -64,7 +64,7 @@ OpenQuestion.propTypes = {
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state, questionId) {
-  console.log('OPEN QUESTION state: ', state);
+  //console.log('OPEN QUESTION state: ', state);
   //This list of parts are based on the questionId
   return {parts: getPartsResult(state, questionId)};
 }

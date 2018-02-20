@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   render() {
-  console.log('App render this.props.questions: ',this.props.questions);
+  //console.log('App render this.props.questions: ',this.props.questions);
    const { questions } = this.props;
 
    if (!questions) return null;
