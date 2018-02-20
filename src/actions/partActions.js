@@ -19,10 +19,10 @@ export function updateTextSuccess(updatedText, questionId, partId) {
                 }
               }
 
-export function loadSuggestions(openQuestion, questionId, partId) {
+export function loadSuggestions(parts, questionId, partId) {
   return function (dispatch){
-
-    return suggestionApi.getSuggestions(openQuestion, partId)
+  
+    return suggestionApi.getSuggestions(parts, questionId, partId)
       .then(result=> {
         dispatch(loadSuggestionsSuccess(result.suggestions, questionId, partId));
       })
