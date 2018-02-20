@@ -5,16 +5,15 @@ import './App.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-//import * as questionActions from './actions/questionActions';
-import { loadQuestions } from './actions/questionActions';
+import * as questionActions from './actions/questionActions';
+//import { questionActions } from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
 import {getQuestionsResult} from './selectors'
 
 class App extends Component {
 
   componentDidMount() {
-    console.log('Component Did Mount');
-    this.props.loadQuestions();
+    this.props.actions.loadQuestions();
   }
 
   render() {
@@ -41,10 +40,10 @@ class App extends Component {
 }
 
 
-// App.propTypes={
-//   //questions: PropTypes.object.isRequired,
-//   actions : PropTypes.object.isRequired
-// };
+App.propTypes={
+  questions: PropTypes.object.isRequired,
+  actions : PropTypes.object.isRequired
+};
 
 
 //-------------------------------------------------------------------
@@ -55,11 +54,11 @@ class App extends Component {
 }
 
 
-// function mapDispatchToProps (dispatch)
-// {
-//   return {
-//     actions: bindActionCreators(questionActions,dispatch)
-//   };
-// }
+function mapDispatchToProps (dispatch)
+{
+  return {
+    actions: bindActionCreators(questionActions,dispatch)
+  };
+}
 
-export default connect(mapStateToProps, {loadQuestions})(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
