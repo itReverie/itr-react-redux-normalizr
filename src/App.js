@@ -8,9 +8,7 @@ import {bindActionCreators} from 'redux';
 //import * as questionActions from './actions/questionActions';
 import { loadQuestions } from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
-import {getQuestions} from './selectors'
-import { createSelector } from 'reselect';
-import Immutable from 'immutable';
+import {getQuestionsResult} from './selectors'
 
 class App extends Component {
 
@@ -20,7 +18,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('App render: ',this.props);
+  console.log('App render: ',this.props);
    const { questions } = this.props;
 
    if (!questions) return null;
@@ -53,11 +51,7 @@ class App extends Component {
 //Redux connect section
 //-------------------------------------------------------------------
  function mapStateToProps(state) {
-  console.log('CURRENT STATE???',state);
-  const getQuestions = state => {let variable=state.getIn(['entities', 'questions']);
-                                console.log('Questions???',variable);};
-  console.log('MAPSTATETOPROPS getQuestions:',getQuestions(state) )
-   return {questions: getQuestions(state) };
+   return {questions: getQuestionsResult(state) };
 }
 
 

@@ -2,9 +2,14 @@ import { createSelector } from 'reselect';
 import Immutable from 'immutable';
 import { Map } from 'immutable';
 
-const getQuestions = state => state.get('questions');
+const getQuestions = state => {
+  console.log('SELECTOR: ',state);
+  state.getIn(['entities', 'questions']);}
 
-
+export const getQuestionsResult = createSelector(
+  [ getQuestions ],
+  (questions) => {  return questions }
+);
 // const getItem = (state, id) => state.byId[id];
 // const getQuestions = (state, questionId) => state.parts.get('byQuestionId');
 // const getItemsIds = state => state.ids;

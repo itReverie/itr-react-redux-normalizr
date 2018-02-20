@@ -3,12 +3,13 @@ import initialState from "./initialState";
 import { List, Map , fromJS} from 'immutable';
 import Immutable from 'immutable';
 
-
-export default function questionReducer(state = initialState, action) {
+//initialState --renders empty blank
+//initialState.questions --Reducer "questions" returned undefined when handling "@@INIT" action.
+export default function questionReducer(state = fromJS({}), action) {
   switch (action.type) {
     case types.LOAD_QUESTIONS_SUCCESS:
       console.log('REDUCER questions original state:',state);
-      console.log('REDUCER questions action:',action.payload);
+      console.log('REDUCER questions action:',action);
       let newState=state.mergeDeep(action.payload);
       console.log('REDUCER questions new state:',newState);
       return newState;
