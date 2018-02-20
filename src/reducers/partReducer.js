@@ -14,16 +14,17 @@ export default function partReducer(state = fromJS({parts:{}}), action) {
           console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
           console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
 
-         let filterPart=state.getIn(['byQuestionId',
+         let filterPart=state.setIn(['byQuestionId',
                       action.questionId.toString(),
                       'byPartId',
-                      action.partId.toString()]);
+                      action.partId.toString(),
+                      'text'],                      action.updatedText);
          console.log(filterPart);
-         let updatedState = filterPart.set('text', action.updatedText)
-         console.log(updatedState);
+         //let updatedState = filterPart.set('text', action.updatedText)
+         //console.log(updatedState);
          //xxx.set('text', action.updatedText);
 
-          return updatedState;
+          return filterPart;
     case types.UPDATE_TEXT_ERROR:
           return state.part;
     case types.LOAD_SUGGESTIONS_SUCCESS:
