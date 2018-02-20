@@ -18,8 +18,8 @@ export function loadQuestions() {
         console.log('Result from API:',apiData);
         //const normalizedData = normalizrQuestions(apiData);
         //console.log('Result from NORMALIZR:',normalizedData);
+        dispatch(loadPartsSuccess(apiData.parts));
         dispatch(loadQuestionsSuccess(apiData.questions));//ASK: Do I need to send all data or filter questions?
-        dispatch(loadPartsSuccess(apiData.parts));//ASK: Do I need to send all data or filter questions?
       })
       .catch(error => {
         throw error;
