@@ -87,5 +87,44 @@ export default [
               text: ""
         }
     ]
-}
+  },
+  {
+    id: 6,
+    template:2,
+    openQuestion: true,
+    longQuestion: null,
+        parts: [
+        {
+            id: 1,
+            isReadOnly: true,
+            type: "other",
+            text: "How many",
+            suggestions:[],
+
+        },
+        {
+            id: 2,
+            isReadOnly: false,
+            type: "noun",
+              suggestions:[],
+              text: ""
+        },
+        {
+            id: 3,
+            isReadOnly: true,
+            type: "other",
+            text: "that are",
+              suggestions:[]
+        },
+        {
+            id: 4,
+            type: "adj",
+            isReadOnly: false,
+            dependsOn: 1,
+              suggestions:[],
+              text: ""
+        }
+    ]
+  }
+
 ]

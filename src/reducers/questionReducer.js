@@ -1,7 +1,6 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
-import { List, Map , fromJS} from 'immutable';
-import Immutable from 'immutable';
+import { fromJS} from 'immutable';
 
 //initialState --renders empty blank
 //initialState.questions --Reducer "questions" returned undefined when handling "@@INIT" action.
@@ -13,8 +12,10 @@ export default function questionReducer(state = fromJS({}), action) {
       let newState=state.mergeDeep(action.payload);
       console.log('REDUCER questions new state:',newState);
       return newState;
-    case types.LOAD_QUESTIONS_ERROR:
-      return action.questions;
+    case types.LOAD_PARTS_SUCCESS:
+        let newStateParts=state.mergeDeep(action.payload);
+        console.log('REDUCER parts new state:',newStateParts);
+        return newStateParts;
 
     default:
       return state;

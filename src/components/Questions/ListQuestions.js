@@ -22,10 +22,10 @@ export default class ListQuestions extends PureComponent {
 
                  /** Renders a list of questions */
                  render() {
-
+                    console.log('Render listquestions',this.props.listQuestions);
                    return <StyledListQuestions width={this.props.width} height={this.props.height}>
                        <Subtitle subtitle="Questions" />
-                       {this.props.listQuestions.getIn(['entities','questions']).map(
+                       {this.props.listQuestions.map(
                          (question) => (
                            <Question
                              key={question.get('id')}

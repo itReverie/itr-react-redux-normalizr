@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 
 import * as questionActions from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
-import {getQuestionsResult} from './selectors'
+import {getQuestionsResult} from './selectors/questions'
 
 class App extends Component {
 
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   render() {
-  console.log('App render: ',this.props);
+  console.log('App render this.props.questions: ',this.props.questions);
    const { questions } = this.props;
 
    if (!questions) return null;
@@ -29,7 +29,7 @@ class App extends Component {
         </header>
 
         <ListQuestions
-           listQuestions={questions}
+           listQuestions={questions.get('questions')}
            width={800}
            showLongQuestion={true}
            height={800}/>
