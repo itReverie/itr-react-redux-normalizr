@@ -20,12 +20,13 @@ const StyledOpenQuestion = styled.div`
 class OpenQuestion extends PureComponent {
   getComponent(part)
   {
+    console.log('PART:', part);
     let component=null;
     if(part !== undefined)
     {
-         if(part.isReadOnly)
+         if(part.get('isReadOnly'))
          {
-           component= <Label text={part.text} questionId={this.props.questionId} key={part.id}/>
+           component= <Label text={part.get('text')} questionId={this.props.questionId} key={part.get('id')}/>
           }
          else{
             component= null;//<Textbox part={part} questionId={this.props.question.id} key={part.id}/>;
@@ -39,7 +40,7 @@ class OpenQuestion extends PureComponent {
 
     return (
       <StyledOpenQuestion>
-        {this.props.parts.map(part => {
+        {this.props.parts.get('byPartId').map(part => {
           return this.getComponent(part)})}
         <Label text={'?'} />
       </StyledOpenQuestion>
