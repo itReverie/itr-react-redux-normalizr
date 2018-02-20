@@ -2,7 +2,7 @@
 import { fromJS } from 'immutable';
 
 const initialState= fromJS({
-  questions:{},
+  questions:[],
   parts:{}
 });
 console.log('REDUCER initial state: ',initialState);

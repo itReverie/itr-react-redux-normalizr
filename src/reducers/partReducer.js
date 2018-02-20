@@ -3,8 +3,13 @@ import initialState from "./initialState";
 import { fromJS} from 'immutable';
 
 
-export default function partReducer(state = fromJS({}), action) {
+export default function partReducer(state = fromJS({parts:{}}), action) {
   switch (action.type) {
+    case types.LOAD_PARTS_SUCCESS:
+        let newStateParts=state.mergeDeep(action.parts);
+        console.log('REDUCER parts new state:',newStateParts);
+        return newStateParts;
+
     case types.UPDATE_TEXT_SUCCESS:
           console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
           console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);

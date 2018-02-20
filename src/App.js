@@ -29,7 +29,7 @@ class App extends Component {
         </header>
 
         <ListQuestions
-           listQuestions={questions.get('questions')}
+           listQuestions={questions}
            width={800}
            showLongQuestion={true}
            height={800}/>

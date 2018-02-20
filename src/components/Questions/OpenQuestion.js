@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Textbox from "./TextboxPart";
+//import Textbox from "./TextboxPart";
 import Label from "./LabelPart";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as partActions from '../../actions/questionActions';
-import {getPartsResult} from './selectors'
+import {getPartsResult} from '../../selectors/parts'
 
 const StyledOpenQuestion = styled.div`
   display: flex;
@@ -25,17 +25,17 @@ class OpenQuestion extends PureComponent {
     {
          if(part.isReadOnly)
          {
-           component= <Label text={part.text} questionId={this.props.question.id} key={part.id}/>
+           component= <Label text={part.text} questionId={this.props.questionId} key={part.id}/>
           }
          else{
-            component= <Textbox part={part} questionId={this.props.question.id} key={part.id}/>;
+            component= null;//<Textbox part={part} questionId={this.props.question.id} key={part.id}/>;
          }
     }
     return component;
   }
   render() {
       console.log('OPEN Question props:',this.props);
-      let questionParts=this.props.parts.byQuestionId[this.props.questionId].byPartId;
+      //let questionParts=this.props.parts.byQuestionId[this.props.questionId].byPartId;
 
     return (
       <StyledOpenQuestion>
@@ -60,6 +60,8 @@ OpenQuestion.propTypes = {
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state, questionId) {
+  console.log('OPEN QUESTION state: ', state);
+  //This list of parts are based on the questionId
   return {parts: getPartsResult(state, questionId)};
 }
 

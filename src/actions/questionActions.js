@@ -2,14 +2,14 @@ import * as types from "./actionTypes";
 import questionsApi from "../api/questionAPI";
 import normalizrQuestions from "../api/normalizr/normalizrQuestions";
 
-function loadPartsSuccess(payload) {
+function loadPartsSuccess(parts) {
          return { type: types.LOAD_PARTS_SUCCESS,
-                  payload: payload };
+                  parts: parts };
        }
 
-function loadQuestionsSuccess(payload) {
+function loadQuestionsSuccess(questions) {
          return { type: types.LOAD_QUESTIONS_SUCCESS,
-                  payload: payload };
+                  questions: questions };
        }
 
 export function loadQuestions() {
@@ -18,8 +18,8 @@ export function loadQuestions() {
         console.log('Result from API:',apiData);
         //const normalizedData = normalizrQuestions(apiData);
         //console.log('Result from NORMALIZR:',normalizedData);
-        dispatch(loadQuestionsSuccess(apiData));//ASK: Do I need to send all data or filter questions?
-        dispatch(loadPartsSuccess(apiData));//ASK: Do I need to send all data or filter questions?
+        dispatch(loadQuestionsSuccess(apiData.questions));//ASK: Do I need to send all data or filter questions?
+        dispatch(loadPartsSuccess(apiData.parts));//ASK: Do I need to send all data or filter questions?
       })
       .catch(error => {
         throw error;

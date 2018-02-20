@@ -28,7 +28,7 @@ export default class ListQuestions extends PureComponent {
                        {this.props.listQuestions.map(
                          (question) => (
                            <Question
-                             key={question.get('id')}
+                             key={question.id}
                              question={question}
                              showLongQuestion={true}
                            />
