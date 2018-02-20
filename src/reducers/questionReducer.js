@@ -7,10 +7,10 @@ import { fromJS} from 'immutable';
 export default function questionReducer(state = fromJS({}), action) {
   switch (action.type) {
     case types.LOAD_QUESTIONS_SUCCESS:
-      console.log('REDUCER questions original state:',state);
-      console.log('REDUCER questions action:',action);
+      //console.log('REDUCER questions original state:',state);
+      //console.log('REDUCER questions action:',action);
       let newState=state.mergeDeep(action.payload);
-      console.log('REDUCER questions new state:',newState);
+      //console.log('REDUCER questions new state:',newState);
       return newState;
     case types.LOAD_PARTS_SUCCESS:
         let newStateParts=state.mergeDeep(action.payload);

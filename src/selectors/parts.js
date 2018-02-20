@@ -13,7 +13,7 @@ const getParts = state => {
                               return pregGet;
                               };
 
-export const getQuestionsResult = createSelector(
+export const getPartsResult = createSelector(
   [ getParts ],
   (parts) => {  return parts }
 );

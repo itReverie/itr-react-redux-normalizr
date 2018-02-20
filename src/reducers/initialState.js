@@ -5,5 +5,5 @@ const initialState= fromJS({
   questions:{},
   parts:{}
 });
-console.log('REDUCER initial state: ',initialState);
+//console.log('REDUCER initial state: ',initialState);
 export default initialState;

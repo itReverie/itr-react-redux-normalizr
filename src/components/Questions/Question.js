@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Text from "../../utils/Text"
 import ShortQuestion from "../Questions/ShortQuestion"
 import CloseQuestion from "../Questions/CloseQuestion";
+import OpenQuestion from "../Questions/OpenQuestion";
 
 
 
@@ -50,7 +51,7 @@ export default class Question extends PureComponent {
                     let longQuestion=null;
                     if (this.state.showLongQuestion) {
                       if(this.props.question.get('openQuestion')){
-                        longQuestion= null;//<OpenQuestion question={this.props.question}/>
+                        longQuestion= <OpenQuestion question={this.props.question}/>
                       }
                       else{
                          longQuestion= <CloseQuestion question={this.props.question.get('longQuestion')} />
