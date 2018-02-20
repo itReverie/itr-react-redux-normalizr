@@ -23,18 +23,11 @@ class App extends Component {
 
    if (questions.size === 0) return <h1>No Result</h1>;
 
-    return <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">React Redux and Normalizr</h1>
-        </header>
-
-        <ListQuestions
+    return <ListQuestions
            listQuestions={questions}
            width={800}
            showLongQuestion={true}
-           height={800}/>
-
-      </div>;
+           height={800}/>;
   }
 }
 

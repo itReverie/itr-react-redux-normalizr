@@ -7,12 +7,13 @@ function loadSuggestionsSuccess(suggestions) {
                   suggestions: suggestions};
 }
 
-export function updateTextSuccess(part, questionId) {
+export function updateTextSuccess(updatedText, questionId, partId) {
          return function (dispatch){
            dispatch(
                 { type: types.UPDATE_TEXT_SUCCESS,
-                  part: part,
-                  questionId: questionId});
+                  updatedText: updatedText,
+                  questionId: questionId,
+                  partId: partId});
                 }
               }
 

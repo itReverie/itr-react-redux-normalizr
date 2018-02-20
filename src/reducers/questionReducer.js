@@ -7,10 +7,10 @@ import { List, fromJS} from 'immutable';
 export default function questionReducer(state = fromJS({questions:[]}), action) {
   switch (action.type) {
     case types.LOAD_QUESTIONS_SUCCESS:
-      console.log('REDUCER questions original state:',state);
-      console.log('REDUCER questions action:',action);
+      //console.log('REDUCER questions original state:',state);
+      //console.log('REDUCER questions action:',action);
       let newState=List(action.questions);
-      console.log('REDUCER questions new state:',newState);
+      console.log('REDUCER questions:',newState);
       return newState;
     default:
       return state;

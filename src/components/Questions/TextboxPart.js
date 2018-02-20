@@ -12,7 +12,7 @@ class TextboxPart extends Component {
 getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-  return inputLength === 0 ? [] : this.props.part.suggestions.filter(suggestion =>
+  return inputLength === 0 ? [] : this.props.part.get('suggestions').toArray().filter(suggestion =>
     suggestion.toLowerCase().slice(0, inputLength) === inputValue
   );};
 getSuggestionValue = suggestion => suggestion;
@@ -20,9 +20,9 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
 
 
   onChange = (event, { newValue }) => {
-    let newPart = Object.assign({},this.props.part);
-    newPart.text = newValue;
-    this.props.actions.updateTextSuccess(newPart, this.props.questionId);
+    //let newPart = Object.assign({},this.props.part);
+    //newPart.text = newValue;
+    this.props.actions.updateTextSuccess(newValue, this.props.questionId, this.props.partId);
     if(newValue.length === 3){
        this.props.actions.loadSuggestions( this.props.parts ,this.props.part.id)
      }
@@ -50,7 +50,7 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
 
   }
     return <Autosuggest
-        suggestions={this.props.part.get('suggestions')}
+        suggestions={this.props.part.get('suggestions').toArray()}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
