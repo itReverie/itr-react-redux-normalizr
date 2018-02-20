@@ -32,3 +32,9 @@ export function loadSuggestions(openQuestion, questionId, partId) {
 
   }
 }
+
+
+export function requestQuery(parts, questionId)
+{
+
+}

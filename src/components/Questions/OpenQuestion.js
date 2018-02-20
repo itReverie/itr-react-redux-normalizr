@@ -18,6 +18,10 @@ const StyledOpenQuestion = styled.div`
 `;
 
 class OpenQuestion extends PureComponent {
+  onClick=(event)=>{
+    //this.props.actions.
+  }
+
   getComponent(part)
   {
     //console.log('PART:', part);
@@ -30,6 +34,7 @@ class OpenQuestion extends PureComponent {
           }
          else{
             component= <Textbox part={part}
+                                parts={this.props.parts}
                                 questionId={this.props.questionId}
                                 partId={part.get('id')}
                                 key={part.get('id')}/>;
@@ -46,6 +51,7 @@ class OpenQuestion extends PureComponent {
         {this.props.parts.get('byPartId').map(part => {
           return this.getComponent(part)})}
         <Label text={'?'} />
+        <button onClick={this.onClick()}>Query</button>
       </StyledOpenQuestion>
     );
 

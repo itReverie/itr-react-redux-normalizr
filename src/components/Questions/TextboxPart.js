@@ -20,9 +20,11 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
   onChange = (event, { newValue }) => {
     //let newPart = Object.assign({},this.props.part);
     //newPart.text = newValue;
+
     this.props.actions.updateTextSuccess(newValue.toLowerCase(), this.props.questionId, this.props.partId);
     if(newValue.length === 3){
-       this.props.actions.loadSuggestions( this.props.part , this.props.questionId, this.props.partId)
+      //TODO: This call might need to be a premise from the previous so I can pass the whole text 
+       this.props.actions.loadSuggestions( this.props.parts.get('byPartId'), this.props.questionId, this.props.partId)
      }
     //  if (event.key === 'Enter') {
     //   console.log('do validate');
@@ -72,6 +74,7 @@ TextboxPart.propTypes={
     questionId: PropTypes.number.isRequired,
     partId: PropTypes.number.isRequired,
     part: PropTypes.object.isRequired,
+    parts: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
 };
 
