@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-//import Textbox from "./TextboxPart";
+import Textbox from "./TextboxPart";
 import Label from "./LabelPart";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -29,13 +29,16 @@ class OpenQuestion extends PureComponent {
            component= <Label text={part.get('text')} questionId={this.props.questionId} key={part.get('id')}/>
           }
          else{
-            component= null;//<Textbox part={part} questionId={this.props.question.id} key={part.id}/>;
+            component= <Textbox part={part}
+                                questionId={this.props.questionId}
+                                partId={part.get('id')}
+                                key={part.get('id')}/>;
          }
     }
     return component;
   }
   render() {
-      console.log('OPEN Question props:',this.props);
+      //console.log('OPEN Question props:',this.props);
       //let questionParts=this.props.parts.byQuestionId[this.props.questionId].byPartId;
 
     return (

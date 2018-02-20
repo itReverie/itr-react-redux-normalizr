@@ -4,6 +4,7 @@ import Autosuggest from 'react-autosuggest';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as partActions from '../../actions/partActions';
+import {getPartResult} from '../../selectors/part'
 
 
 class TextboxPart extends Component {
@@ -41,15 +42,15 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
   };
 
   render() {
-    console.log('Render: ',this.props)
+    console.log('TEXTBOXPART:  render props ',this.props)
     const inputProps = {
-      placeholder:this.props.part.type ,
-      value: this.props.part.text,
+      placeholder:this.props.part.get('type') ,
+      value: this.props.part.get('text'),
       onChange: this.onChange
 
   }
     return <Autosuggest
-        suggestions={this.props.part.suggestions}
+        suggestions={this.props.part.get('suggestions')}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
@@ -63,6 +64,7 @@ renderSuggestion = suggestion => (<div>{suggestion}</div>);
 
 TextboxPart.propTypes={
     questionId: PropTypes.number.isRequired,
+    partId: PropTypes.number.isRequired,
     part: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
 };
@@ -76,9 +78,9 @@ function mapStateToProps(state, props){
   //console.log(state.parts.byQuestionId[props.questionId].byPartId[props.part.id]);
   //Instead of using props.part It seems that using the state is the correct
 
-  let selector = state.toJS().parts.byQuestionId[props.questionId].byPartId[props.part.id];
-  console.log(' TEXTBOXPART: ', selector);
-  return { part: selector};
+  //let selector = state.toJS().parts.byQuestionId[props.questionId].byPartId[props.part.id];
+  console.log(' TEXTBOXPART: state', state);
+  return { part: getPartResult(state, props)};
 }
 
 function mapDispatchToProps (dispatch)

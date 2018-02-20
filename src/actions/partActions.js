@@ -1,5 +1,5 @@
 import * as types from "./actionTypes";
-import suggestionApi from "./api/suggestionAPI";
+import suggestionApi from "../api/suggestionAPI";
 
 
 function loadSuggestionsSuccess(suggestions) {
