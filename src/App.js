@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import * as questionActions from './actions/questionActions';
-//import { questionActions } from './actions/questionActions';
 import ListQuestions from './components/Questions/ListQuestions';
 import {getQuestionsResult} from './selectors'
 
