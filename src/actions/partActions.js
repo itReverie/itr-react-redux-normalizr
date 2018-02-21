@@ -10,18 +10,21 @@ function loadSuggestionsSuccess(suggestions, questionId, partId) {
 }
 
 export function updateTextSuccess(updatedText, questionId, partId) {
-         return function (dispatch){
+         return function (dispatch, getState){
            dispatch(
                 { type: types.UPDATE_TEXT_SUCCESS,
                   updatedText: updatedText,
                   questionId: questionId,
                   partId: partId});
+
+                  //console.log(getState);
+                  return Promise.resolve();
                 }
               }
 
 export function loadSuggestions(parts, questionId, partId) {
   return function (dispatch){
-  
+
     return suggestionApi.getSuggestions(parts, questionId, partId)
       .then(result=> {
         dispatch(loadSuggestionsSuccess(result.suggestions, questionId, partId));

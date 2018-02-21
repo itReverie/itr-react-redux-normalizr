@@ -17,15 +17,33 @@ getSuggestions = value => {
 getSuggestionValue = suggestion => suggestion;
 renderSuggestion = suggestion => (<div>{suggestion}</div>);
 
+ loadSuggestions(newTextValue) {
+  //console.log(newTextValue, this.props );
+  if(newTextValue.length===3)
+  {
+    this.props.actions.loadSuggestions(
+                          this.props.parts.get('byPartId'),
+                          this.props.questionId,
+                          this.props.partId)
+  }
+}
+
   onChange = (event, { newValue }) => {
     //let newPart = Object.assign({},this.props.part);
     //newPart.text = newValue;
 
-    this.props.actions.updateTextSuccess(newValue.toLowerCase(), this.props.questionId, this.props.partId);
-    if(newValue.length === 3){
-      //TODO: This call might need to be a premise from the previous so I can pass the whole text 
-       this.props.actions.loadSuggestions( this.props.parts.get('byPartId'), this.props.questionId, this.props.partId)
-     }
+    this.props.actions.updateTextSuccess(newValue.toLowerCase(),
+                                        this.props.questionId, this.props.partId)
+                      .then(data => this.loadSuggestions(newValue, data))
+                        //(props, newValue) =>{
+                        //console.log('It is good', newValue)
+                        //this.props.actions.loadSuggestions( this.props.parts.get('byPartId'), this.props.questionId, this.props.partId)
+                        //}
+
+    // if(newValue.length === 3){
+    //   //TODO: This call might need to be a premise from the previous so I can pass the whole text
+    //    this.props.actions.loadSuggestions( this.props.parts.get('byPartId'), this.props.questionId, this.props.partId)
+    //  }
     //  if (event.key === 'Enter') {
     //   console.log('do validate');
     // }
@@ -90,9 +108,7 @@ function mapStateToProps(state, props){
 
 function mapDispatchToProps (dispatch)
 {
-  return {
-    actions: bindActionCreators(partActions,dispatch)
-  };
+  return {actions: bindActionCreators(partActions,dispatch)};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TextboxPart);
