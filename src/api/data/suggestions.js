@@ -1,6 +1,7 @@
 export default  {
             questionId:3,
             partId: 6,
+            text:'cus',
 			      suggestions:[{name:'customers'},
                          {name:'clients'},
                          {name:'borrowers'},

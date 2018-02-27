@@ -6,22 +6,20 @@ function loadSuggestionsSuccess(suggestions, questionId, partId) {
          return { type: types.LOAD_SUGGESTIONS_SUCCESS,
                   suggestions: suggestions,
                   questionId: questionId,
-                  partId: partId};
+                  partId: partId
+              };
 }
 
 export function updateTextSuccess(updatedText, questionId, partId) {
          return function (dispatch, getState){
-           console.log('Action:',updatedText);
-           dispatch(
-                { type: types.UPDATE_TEXT_SUCCESS,
+           //console.log('Action:',updatedText);
+           dispatch({ type: types.UPDATE_TEXT_SUCCESS,
                   updatedText: updatedText,
                   questionId: questionId,
                   partId: partId});
-
-                  //console.log(getState);
-                  return Promise.resolve(updatedText);
-                }
-              }
+            return Promise.resolve(updatedText);
+            }
+    }
 
 export function loadSuggestions(parts, questionId, partId) {
   return function (dispatch){
@@ -29,6 +27,7 @@ export function loadSuggestions(parts, questionId, partId) {
     return suggestionApi.getSuggestions(parts, questionId, partId)
       .then(result=> {
         dispatch(loadSuggestionsSuccess(result.suggestions, questionId, partId));
+        return Promise.resolve();
       })
       .catch(error => {
         throw error;
