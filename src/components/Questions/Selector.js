@@ -10,8 +10,8 @@ import {bindActionCreators} from 'redux';
 import * as partActions from '../../actions/partActions';
 import {getPartResult} from '../../selectors/part'
 
-//import VirtualizedSelect from 'react-virtualized-select';
-import Select from 'react-select';
+import VirtualizedSelect from 'react-virtualized-select';
+//import Select from 'react-select';
 //import {Async} from 'react-select';
 
 class Selector extends Component {
@@ -20,11 +20,11 @@ class Selector extends Component {
    {
      this.onChange = this.onChange.bind(this);
      this.onInputChange = this.onInputChange.bind(this);
-     this.loadOptions = this.loadOptions.bind(this)
+     //this.loadOptions = this.loadOptions.bind(this)
      //this.onInputKeyDown = this.onInputKeyDown.bind(this);
    }
 
-loadSuggestions(newTextValue) {
+  loadSuggestions(newTextValue) {
 
       this.props.actions.loadSuggestions(
                             this.props.parts.get('byPartId'),
@@ -33,26 +33,16 @@ loadSuggestions(newTextValue) {
 
   }
 
+  onChange(something){
+    //console.log('onChange', something);
+    let newValue='';
+    if(something !== null){
+      newValue=something.name;
+    }
 
-loadOptions()
-{
-  this.props.actions.loadSuggestions(
-                        this.props.parts.get('byPartId'),
-                        this.props.questionId,
-                        this.props.partId)
-}
-
-onChange(something){
-  //console.log('onChange', something);
-  let newValue='';
-  if(something !== null){
-    newValue=something.value;
-  }
-
-  //Update text
-  this.props.actions.updateTextSuccess(newValue.toLowerCase(),
+    //Update text
+    this.props.actions.updateTextSuccess(newValue.toLowerCase(),
                                     this.props.questionId, this.props.partId)
-
 
 }
 
@@ -84,26 +74,30 @@ onChange(something){
 
  onInputChange (newTextValue)
  {
-     //console.log('onInputChange:',newTextValue);
+     console.log('onInputChange:',newTextValue);
 
-     if(newTextValue.length===3)
+     if(newTextValue.length===3 && newTextValue.trim() !=="")
      {
-       this.props.actions.loadSuggestions(
-                             this.props.parts.get('byPartId'),
-                             this.props.questionId,
-                             this.props.partId).then()
+       this.props.actions.updateTextSuccess(newTextValue.toLowerCase(),
+                                            this.props.questionId,
+                                            this.props.partId)
+                         .then(data => {
+                           //console.log('is data updating:',data);
+                           this.loadSuggestions(newTextValue, data)
+                                              })
+
      }
      //data=>console.log('dataLoadSuggess:'+data)
      // this.props.actions.updateTextSuccess(newTextValue.toLowerCase(),
      //                                   this.props.questionId, this.props.partId)
      //                  .then(data => this.loadSuggestions(newTextValue, data))
      //                  //
-
+    //console.log(newTextValue);
     return newTextValue;
  }
 
   render () {
-    console.log('RENDER: ',this.props.part.get('suggestions').size);
+    //console.log('RENDER: state- ',this.state);
     let suggestions=[];
     if(this.props.part.get('suggestions').size === undefined)
     {
@@ -119,8 +113,10 @@ onChange(something){
 // onInputChange={this.onInputChange}
 //onChange={this.onChange}
     return (
-      <Select style={{width:'180px'}}
+      <VirtualizedSelect style={{width:'180px'}}
         options={suggestions}
+      labelKey='name'
+      valueKey='name'
         value={this.props.part.toJS().text}
         onChange={this.onChange}
          onInputChange={this.onInputChange}

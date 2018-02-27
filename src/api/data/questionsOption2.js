@@ -20,20 +20,8 @@ export default {
             id: 2,
             isReadOnly: false,
             type: "noun",
-            text: "abc",
-            suggestions: [{
-                label: 'abc',
-                value: 'abc'
-              },
-              {
-                label: 'def',
-                value: 'def'
-              },
-              {
-                label: 'ghi',
-                value: 'ghi'
-              }
-            ]
+            text: "",
+            suggestions: []
           }
         }
       }
