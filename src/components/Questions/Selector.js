@@ -18,44 +18,39 @@ class Selector extends Component {
    {
      this.onChange = this.onChange.bind(this);
      this.onInputChange = this.onInputChange.bind(this);
-     this.dispatchTheActions = this.dispatchTheActions.bind(this);
+     this.dispatchSuggestions = this.dispatchSuggestions.bind(this);
    }
 
-  onChange(something){
-    //console.log('onChange', something);
+  onChange(selectedOption){
     let newValue='';
-    if(something !== null){
-      newValue=something.name;
+    if(selectedOption !== null){
+      newValue=selectedOption.name;
     }
     this.props.actions.updateTextSuccess(newValue.toLowerCase(),
                                     this.props.questionId, this.props.partId)
 }
 
-dispatchTheActions(newTextValue)
+dispatchSuggestions(newTextValue)
 {
   return this.props.actions.updateTextSuccess(newTextValue.toLowerCase(),
                                        this.props.questionId,
                                        this.props.partId)
-                    .then(data => {
-                      return this.props.actions.loadSuggestions(
-                                            this.props.parts.get('byPartId'),
-                                            this.props.questionId,
-                                            this.props.partId).then(a=>{console.log('osea si :',a)
-                                                                       return a;
-                                                                       })
-                                          })
+         .then(data => {
+          return this.props.actions.loadSuggestions(
+                this.props.parts.get('byPartId'),
+                this.props.questionId,
+                this.props.partId)
+                .then(textUpdated=>{return textUpdated;})})
 
 }
 
 
- async onInputChange (newTextValue)
+onInputChange (newTextValue)
  {
      if(newTextValue.length===3 && newTextValue.trim() !=="")
      {
-      //console.log('osea si onInputChange:',x);
-       await Promise.resolve( this.dispatchTheActions(newTextValue))
+       return Promise.resolve( this.dispatchSuggestions(newTextValue))
      }
-    console.log('onInputChange:',newTextValue);
     return newTextValue;
  }
   render () {
