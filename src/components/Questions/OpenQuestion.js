@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Textbox from "./TextboxPart";
+import Selector from "./Selector";
 import Label from "./LabelPart";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -33,7 +33,7 @@ class OpenQuestion extends PureComponent {
            component= <Label text={part.get('text')} questionId={this.props.questionId} key={part.get('id')}/>
           }
          else{
-            component= <Textbox part={part}
+            component= <Selector part={part}
                                 parts={this.props.parts}
                                 questionId={this.props.questionId}
                                 partId={part.get('id')}

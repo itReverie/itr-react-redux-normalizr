@@ -11,6 +11,7 @@ function loadSuggestionsSuccess(suggestions, questionId, partId) {
 
 export function updateTextSuccess(updatedText, questionId, partId) {
          return function (dispatch, getState){
+           console.log('Action:',updatedText);
            dispatch(
                 { type: types.UPDATE_TEXT_SUCCESS,
                   updatedText: updatedText,
@@ -18,7 +19,7 @@ export function updateTextSuccess(updatedText, questionId, partId) {
                   partId: partId});
 
                   //console.log(getState);
-                  return Promise.resolve();
+                  return Promise.resolve(updatedText);
                 }
               }
 
@@ -34,10 +35,4 @@ export function loadSuggestions(parts, questionId, partId) {
       });
 
   }
-}
-
-
-export function requestQuery(parts, questionId)
-{
-
 }
