@@ -69,6 +69,7 @@ onInputChange (newTextValue)
         value={this.props.part.toJS().text}
         onChange={this.onChange}
         onInputChange={this.onInputChange}
+                         onSelectResetsInput={false}
       />
     )
   }
