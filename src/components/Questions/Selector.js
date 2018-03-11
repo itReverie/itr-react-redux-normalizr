@@ -9,8 +9,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as partActions from '../../actions/partActions';
 import {getPartResult} from '../../selectors/part'
-
 import VirtualizedSelect from 'react-virtualized-select';
+
 
 class Selector extends Component {
 
@@ -22,17 +22,18 @@ class Selector extends Component {
    }
 
   onChange(selectedOption){
+      //console.log('onChange selectedOption: ',selectedOption);
     let newValue='';
     if(selectedOption !== null){
       newValue=selectedOption.name;
     }
-    this.props.actions.updateTextSuccess(newValue.toLowerCase(),
+    this.props.actions.updateTextSuccess(newValue,
                                     this.props.questionId, this.props.partId)
 }
 
 dispatchSuggestions(newTextValue)
 {
-  return this.props.actions.updateTextSuccess(newTextValue.toLowerCase(),
+  return this.props.actions.updateTextSuccess(newTextValue,
                                        this.props.questionId,
                                        this.props.partId)
          .then(data => {
@@ -66,10 +67,15 @@ onInputChange (newTextValue)
         options={suggestions}
         labelKey='name'
         valueKey='name'
+        placeholder={this.props.part.toJS().type}
         value={this.props.part.toJS().text}
         onChange={this.onChange}
         onInputChange={this.onInputChange}
         onSelectResetsInput={false}
+        onBlurResetsInput={false}
+        closeOnSelect={true}
+        tabSelectsValue={true}
+        searchable={true}
       />
     )
   }
@@ -89,7 +95,6 @@ Selector.propTypes={
 //Redux connect section
 //-------------------------------------------------------------------
 function mapStateToProps(state, props){
-  //console.log(state);
   return { part: getPartResult(state, props)};
 }
 

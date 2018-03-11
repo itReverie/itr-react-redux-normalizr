@@ -11,7 +11,7 @@ export default function partReducer(state = fromJS({parts:{}}), action) {
 
     case types.UPDATE_TEXT_SUCCESS:
           //console.log('Reducer-UPDATE_TEXT_SUCCESS-   state: ',state);
-          console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
+          //console.log('Reducer-UPDATE_TEXT_SUCCESS-   action: ',action);
 
          let filterPart=state.setIn(['byQuestionId',
                       action.questionId.toString(),
